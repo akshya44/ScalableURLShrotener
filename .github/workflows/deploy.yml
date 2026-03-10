@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE: ${{ github.repository }}/backend
-  FRONTEND_IMAGE: ${{ github.repository }}/frontend
+  BACKEND_IMAGE: ${{ github.repository_owner }}/scalableurlshrotener/backend
+  FRONTEND_IMAGE: ${{ github.repository_owner }}/scalableurlshrotener/frontend
 
 jobs:
   # ── Test ─────────────────────────────────────────────────────────
