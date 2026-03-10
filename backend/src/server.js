@@ -91,8 +91,8 @@ io.on('connection', (socket) => {
 // Export io so workers/controllers can emit events
 app.set('io', io);
 
-server.listen(PORT, () => {
-    console.log(`🚀 ShortLinkX API running on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 ShortLinkX API running on http://0.0.0.0:${PORT}`);
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
     startWorker(io); // Pass io to BullMQ analytics worker
     startExpiryWorker(); // Start cron job to disable expired URLs
