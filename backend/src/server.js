@@ -29,7 +29,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(globalLimiter);
 
 // ── Health Check ────────────────────────────────────────────────────────────
-app.get('/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
+app.get('/health', (req, res) => {
+    let dbStatus = 'disconnected';
+    try {
+        const db = require('./config/db');
+        db.prepare('SELECT 1').get();
+        dbStatus = 'connected';
+    } catch (e) { }
+
+    let redisStatus = 'disconnected';
+    try {
+        const redis = require('./config/redis');
+        if (redis && redis.status === 'ready') redisStatus = 'connected';
+    } catch (e) { }
+
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        redis: redisStatus,
+        database: dbStatus
+    });
+});
 
 // ── API Routes ──────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);

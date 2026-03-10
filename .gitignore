@@ -5,6 +5,8 @@ backend/data/
 *.db
 *.db-wal
 *.db-shm
+*.sqlite
+*.sqlite3
 dist/
 .DS_Store
 Thumbs.db

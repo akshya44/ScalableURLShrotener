@@ -1,5 +1,7 @@
 # ShortLinkX 🔗⚡
 
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+
 **Scalable URL Shortening Platform with Real-Time Analytics**
 
 A production-grade URL shortener built to demonstrate backend engineering, system design, caching, DevOps, and frontend dashboards in a single project.
@@ -24,6 +26,19 @@ graph LR
 User → /:shortCode → Check Redis Cache → Hit: redirect | Miss: SQLite → cache → redirect
                                                          → Enqueue click event asynchronously
 ```
+
+---
+
+## ⚡ Performance Optimizations
+- **Redis Caching:** Accelerates redirect lookups by reading from RAM instead of disk.
+- **BullMQ Async Analytics:** Offloads tracking queries to a background worker to ensure redirection latency remains near 0ms.
+- **Base62 Encoding:** Produces the shortest possible guaranteed unique URL identifiers.
+
+## 🛡️ Security
+- **JWT Authentication:** Sessions are secured with signed JSON Web Tokens.
+- **API Keys:** Secure programmatic access for headless clients.
+- **bcrypt Password Hashing:** Protects individual link passwords at rest.
+- **Rate Limiting:** Prevents brute force and spam attacks on the shorten endpoint using Redis.
 
 ---
 
@@ -181,6 +196,20 @@ clicks (id, short_code, ip_address, country, city, device, browser, os, referrer
 | Frontend | React 18 · Vite · Recharts · React Router v6 · Axios · socket.io-client |
 | DevOps | Docker · Docker Compose · NGINX · GitHub Actions |
 | Analytics | geoip-lite · ua-parser-js |
+
+---
+
+## 🖼️ Project Screenshots
+*(Dashboard, Analytics, Server UI, and URL Creation UI demonstrations can be placed here - add your image files to the repo)*
+
+## 🌐 Live Demo
+- **Frontend:** [https://shortlinkx.vercel.app](https://shortlinkx.vercel.app)
+- **Backend:** [https://shortlinkx-api.onrender.com](https://shortlinkx-api.onrender.com)
+
+## 🔮 Future Improvements
+- Replace SQLite with PostgreSQL for multi-node horizontal scaling
+- Add a Redis cluster for high availability
+- Add Kubernetes deployment manifests (Helm charts)
 
 ---
 
